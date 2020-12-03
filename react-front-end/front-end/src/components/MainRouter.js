@@ -13,10 +13,12 @@ export class MainRouter extends Component {
 
     render() {
         const isLogged = this.props.isLogged;
+        const products = this.props.products;
         console.log(isLogged);
+        console.log(products);
         if(!isLogged){
             return (
-                NotLoggedNav()
+                NotLoggedNav(products)
             );
         }
         else{
@@ -67,7 +69,7 @@ function LoggedNav(){
     );
 }
 
-function NotLoggedNav(){
+function NotLoggedNav(products){
     return(
     <Router>
             <div>
@@ -88,14 +90,11 @@ function NotLoggedNav(){
               {/* A <Switch> looks through its children <Route>s and
                   renders the first one that matches the current URL. */}
               <Switch>
-                <Route path="/">
-                  <Home />
-                </Route>
                 <Route path="/Home">
-                  <Home />
+                  <Home products={products}/>
                 </Route>
                 <Route path="/ProductList">
-                  <ProductList />
+                  <ProductList products={products}/>
                 </Route>
                 <Route path="/LoginForm">
                   <LoginForm />

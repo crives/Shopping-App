@@ -47,6 +47,21 @@
   li a:hover {
     background-color: #111;
   }
+  table{
+    border: 1px solid black;
+    font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  padding: 1vw;
+  }
+  tr{
+    border-spacing: 1px;
+  }
+  td, th{
+    text-align: center;
+    border-bottom: 1px solid #111;
+    padding: 10px;
+  }
   #company{
     text-align: left;
     color: #ddd;
@@ -80,12 +95,6 @@
     white-space:no-wrap;
     text-align: center;
   }
-  .thumbnail{
-    width:75%;
-    height:75%;
-    margin:0 1em 0 1em;
-    text-align: center;
-  }
   .item-body{
     text-overflow:elipsis;
   }
@@ -103,4 +112,13 @@
   }
   .welcome{
     text-align: center;
+  }
+  .producttitle{
+    text-align: center;
+  }
+
+  .productlist.thumbnail{
+    display: table;
+    max-width: 5vw;
+    max-height: 5vw;
   }

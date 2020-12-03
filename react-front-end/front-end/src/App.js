@@ -22,7 +22,7 @@ export class App extends Component {
   render() {
     return (
       <div>
-        <MainRouter isLogged={this.state.isLogged} />
+        <MainRouter isLogged={this.state.isLogged} products={this.state.products} />
       </div>
     );
   }
