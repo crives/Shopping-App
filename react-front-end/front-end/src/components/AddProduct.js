@@ -39,9 +39,9 @@ export class AddProduct extends Component {
                     <label for="stockText">Units in Stock: </label>
                     <input type="text" id="stockText" name="stockText" />
                 </div>
-                <div>
+                {/* <div>
                     <ImageUploader withIcon={true} buttonText='Choose Image' onChange={this.onDrop} imgExtension={['.jpg', '.gif', '.png']} maxFileSize={5242880} />
-                </div>
+                </div> */}
                 <div>
                     <button type="submit" id="submitButton">Add Product</button>
                     <button id="cancelButton">Cancel</button>

@@ -16,56 +16,57 @@ export class MainRouter extends Component {
     const isLogged = this.props.isLogged;
     const products = this.props.products;
     const isAdmin = this.props.isAdmin;
-    if (isLogged && isAdmin) {
+    console.log(isAdmin);
+    if (isLogged) {
       return (
-        loggedAdminNav(products, isLogged, isAdmin)
+        LoggedNav(products, isAdmin, isLogged)
       );
     }
-    if(isLogged && !isAdmin) {
-      return (
-        LoggedNav(products, isLogged, isAdmin)
-      );
-    }
-    else{
+    else {
       return NotLoggedNav(products)
     }
   }
 }
 
 function LoggedNav(products, isAdmin, isLogged) {
-  return (
-    <Router>
-      <div>
-        <header>
-          <ul>
-            <li>
-              <Link to="/Home">Home</Link>
-            </li>
-            <li>
-              <Link to="/ProductList">List of Products</Link>
-            </li>
-            <li>
-              <Link to="/AddProduct">Add a Product</Link>
-            </li>
-          </ul>
-        </header>
+  if (isAdmin) {
+    return (
+      <Router>
+        <div>
+          <header>
+            <ul>
+              <li>
+                <Link to="/Home">Home</Link>
+              </li>
+              <li>
+                <Link to="/ProductList">List of Products</Link>
+              </li>
+              <li>
+                <Link to="/AddProduct">Add a Product</Link>
+              </li>
+            </ul>
+          </header>
 
-        {/* A <Switch> looks through its children <Route>s and
+          {/* A <Switch> looks through its children <Route>s and
                   renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/Home">
-            <Home products={products} isLogged={isLogged} isAdmin={isAdmin} />
-          </Route>
-          <Route path="/ProductList">
-            <ProductList products={products} isLogged={isLogged} isAdmin={isAdmin} />
-          </Route>
-          <Route path="/AddProduct">
-            <AddProduct />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
-  );
+          <Switch>
+            <Route path="/Home">
+              <Home products={products} isLogged={isLogged} isAdmin={isAdmin} />
+            </Route>
+            <Route path="/ProductList">
+              <ProductList products={products} isLogged={isLogged} isAdmin={isAdmin} />
+            </Route>
+            <Route path="/AddProduct">
+              <AddProduct />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    );
+  }
+  else {
+    loggedAdminNav(products, isLogged, isAdmin)
+  }
 }
 
 function loggedAdminNav(products, isLogged, isAdmin) {

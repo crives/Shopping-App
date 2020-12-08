@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import { ProductDetail } from "./ProductDetail";
 import { AddProduct } from './AddProduct';
+import { EditProduct } from './EditProduct';
 
 export class ProductList extends Component {
 
@@ -87,10 +88,11 @@ function AdminView(products) {
                                     <td><Img src={product.image} className="productlist thumbnail" /></td>
                                     <td><Link to={'/ProductDetail/' + product.id}>{product.name}</Link></td>
                                     <td>{product.price}</td>
+                                    <td><button><Link to={'/EditProduct/'+product.id}>Edit Product</Link></button></td>
                                 </tr>
                                 <Switch>
-                                    <Route path={'/ProductDetail/' + product.id}>
-                                        <ProductDetail product={product} />
+                                    <Route path={'/EditProduct/'+product.id}>
+                                        <EditProduct product={product}/>
                                     </Route>
                                 </Switch>
 
