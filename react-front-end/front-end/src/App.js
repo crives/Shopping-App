@@ -10,8 +10,8 @@ export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLogged: false,
-      isAdmin: false,
+      isLogged: true,
+      isAdmin: true,
       products: []
     };
   }
@@ -25,6 +25,7 @@ export class App extends Component {
   }
 
   render() {
+    localStorage.setItem('cart', this.state.cart);
     this.state.products.map(p => (
       p.Link = (
         <ProductDetail product={p} />

@@ -23,9 +23,9 @@ export class RegisterForm extends Component {
     render() {
         return (
             /* This form is not submitting, but placing the control responses in url instead */
-            <form onSubmit={this.submitHandler}>
-                <Router >
-
+            <Router ><Switch>
+                <form onSubmit={this.submitHandler}>
+                
                     <div>
                         <label for="userName">Please enter a User Name: </label>
                         <input type="text" name="userName" onChange={this.changeHandler} />
@@ -53,13 +53,13 @@ export class RegisterForm extends Component {
                         <p>Already have an account? Login <Link to="/LoginForm">here</Link></p>
                     </div>
                     {/* this route repeats the form. work on placement */}
-                    <Switch>
+                    
                         <Route path='/LoginForm'>
                             <LoginForm />
                         </Route>
-                    </Switch>
-                </Router>
-            </form>
+                    
+                
+            </form></Switch></Router>
         );
     }
 

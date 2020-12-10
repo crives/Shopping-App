@@ -22,7 +22,7 @@ export class ProductList extends Component {
             isAdmin: this.props.isAdmin
         }
     }
-    
+
 
     render() {
         if (this.state.isAdmin && this.state.isLogged) {
@@ -95,6 +95,7 @@ function AdminView(products) {
                                 <th>Product Name</th>
                                 <th>Price</th>
                                 <th>Stock</th>
+                                <td>Actions</td>
                             </tr>
                         </thead>
                         {products.map(product => (
@@ -104,8 +105,10 @@ function AdminView(products) {
                                     <td><Link to={'/ProductDetail/' + product.id}>{product.name}</Link></td>
                                     <td>{product.price}</td>
                                     <td>{product.stock}</td>
-                                    <td><button><Link to={'/EditProduct/' + product.id}>Edit Product</Link></button></td>
-                                    <td><button /* onClick={this.deleteProduct} */>Delete Product</button></td> {/* doesnt work yet */}
+                                    <td>
+                                        <button><Link to={'/EditProduct/' + product.id}>Edit Product</Link></button>
+                                        <button /* onClick={this.deleteProduct} */>Delete Product</button>{/* doesnts work yet */}
+                                    </td> 
                                 </tr>
                                 <Switch>
                                     <Route path={'/EditProduct/' + product.id}>
