@@ -1,47 +1,74 @@
 import React, { Component } from 'react';
 import "./common.css";
-import { ImageUploader } from "react-images-upload";
+import  axios from "axios";
 
 export class AddProduct extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { pictures: [], products: this.props.products }
-        this.onDrop = this.onDrop.bind(this);
+        this.state = {
+            name: '',
+            description: '',
+            price: Number,
+            picture: File,
+            stock: Number
+        }
     }
-    onDrop(picture) {
+
+    fileSelectedHandler = event => {
         this.setState({
-            pictures: this.state.pictures.concat(picture)
-        });
+            picture: event.target.files[0]
+        })
+    }
+
+    /* fileUploadHandler = () => {
+        const fd = new FormData();
+        fd.append('image', this.state.picture, this.state.picture.name);
+        //axios.post('url post link here',fd, onUpLoadProgress: progressEvent=>{console.log('Upload Progress: ' + Math.round(progressEvent.loaded / progressEvent.total* 100) + '%')}).then(res => {console.log(res);});
+    } */
+
+    //doesnt work with images, need to update on the backend?
+    submitHandler = e => {
+        e.preventDefault();
+        const postUrl = 'http://localhost:4000/products/add'
+        console.log(this.state);
+        axios.post(postUrl, this.state).then(res => {
+                console.log(res);
+            }).catch(error => {
+                console.log(error);
+            });
+    }
+
+    changeHandler = e => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
     }
 
     render() {
+        const {name, description, price, stock} = this.state;
         return (
-            <form>
+            <form onSubmit={this.submitHandler}>
                 <div>
-                    <label for="productNameText">Product Name: </label>
-                    <input type="text" id="productNameText" name="productNameText" />
-                </div>
-
-                <div>
-                    <label for="categoryText">Item Category: </label>
-                    <input type="text" id="categoryText" name="categoryText" />
+                    <label for="name">Product Name: </label>
+                    <input type="text" name="name" value={name} onChange={this.changeHandler} />
                 </div>
                 <div>
-                    <label for="productDescripArea">Project Description</label>
-                    <textarea id="productDescripArea" name="productDescripArea"></textarea>
+                    <label for="description">Project Description</label>
+                    <textarea name="description" value={description} onChange={this.changeHandler}></textarea>
                 </div>
                 <div>
-                    <label for="priceText">Item Price: </label>
-                    <input type="text" id="priceText" name="priceText" />
+                    <label for="price">Item Price: </label>
+                    <input type="text" name="price" value={price} onChange={this.changeHandler} />
                 </div>
                 <div>
-                    <label for="stockText">Units in Stock: </label>
-                    <input type="text" id="stockText" name="stockText" />
+                    <label for="stock">Units in Stock: </label>
+                    <input type="text" name="stock" value={stock} onChange={this.changeHandler} />
                 </div>
-                {/* <div>
-                    <ImageUploader withIcon={true} buttonText='Choose Image' onChange={this.onDrop} imgExtension={['.jpg', '.gif', '.png']} maxFileSize={5242880} />
-                </div> */}
+                <div>
+                    <input type='file' onChange={this.fileSelectedHandler} />
+                    <button /* onClick={this.fileUploadHandler} */>Upload</button> {/* to be used for post requests */}
+                </div>
                 <div>
                     <button type="submit" id="submitButton">Add Product</button>
                     <button id="cancelButton">Cancel</button>

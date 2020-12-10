@@ -10,21 +10,36 @@ import {
 import { ProductDetail } from "./ProductDetail";
 import { AddProduct } from './AddProduct';
 import { EditProduct } from './EditProduct';
+import axios from 'axios';
 
 export class ProductList extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            products: this.props.products,
+            isLogged: this.props.isLogged,
+            isAdmin: this.props.isAdmin
+        }
+    }
+    
+
     render() {
-        const products = this.props.products;
-        const isLogged = this.props.isLogged;
-        const isAdmin = this.props.isAdmin;
-        if (isAdmin && isLogged) {
-            return AdminView(products);
+        if (this.state.isAdmin && this.state.isLogged) {
+            return AdminView(this.state.products);
         }
         else {
-            return RegUserView(products);
+            return RegUserView(this.state.products);
         }
     }
 }
+
+//delete doesnt work
+/* deleteProduct = (id) => {
+    axios.delete('http://localhost:4000/product/:' + id, id).then(res => {
+        console.log(res)
+    })
+} */
 
 function RegUserView(products) {
     /* View for those logged in but not admin OR for those not logged in */
@@ -79,20 +94,22 @@ function AdminView(products) {
                                 <th>Picture</th>
                                 <th>Product Name</th>
                                 <th>Price</th>
+                                <th>Stock</th>
                             </tr>
                         </thead>
                         {products.map(product => (
                             <tbody>
-
                                 <tr>
                                     <td><Img src={product.image} className="productlist thumbnail" /></td>
                                     <td><Link to={'/ProductDetail/' + product.id}>{product.name}</Link></td>
                                     <td>{product.price}</td>
-                                    <td><button><Link to={'/EditProduct/'+product.id}>Edit Product</Link></button></td>
+                                    <td>{product.stock}</td>
+                                    <td><button><Link to={'/EditProduct/' + product.id}>Edit Product</Link></button></td>
+                                    <td><button /* onClick={this.deleteProduct} */>Delete Product</button></td> {/* doesnt work yet */}
                                 </tr>
                                 <Switch>
-                                    <Route path={'/EditProduct/'+product.id}>
-                                        <EditProduct product={product}/>
+                                    <Route path={'/EditProduct/' + product.id}>
+                                        <EditProduct product={product} />
                                     </Route>
                                 </Switch>
 
@@ -102,7 +119,7 @@ function AdminView(products) {
                     <Link to='/AddProduct'><button>Add Product</button></Link>
                     <Switch>
                         <Route path='/AddProduct'>
-                            <AddProduct/>
+                            <AddProduct />
                         </Route>
                     </Switch>
                 </div>

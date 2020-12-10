@@ -16,7 +16,6 @@ export class MainRouter extends Component {
     const isLogged = this.props.isLogged;
     const products = this.props.products;
     const isAdmin = this.props.isAdmin;
-    console.log(isAdmin);
     if (isLogged) {
       return (
         LoggedNav(products, isAdmin, isLogged)

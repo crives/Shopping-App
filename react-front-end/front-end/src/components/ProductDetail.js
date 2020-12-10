@@ -14,9 +14,10 @@ export class ProductDetail extends Component {
                 </div>
                 <div>
                     <div>
-                        <Img src={product.image} />
+                        <Img src={product.picture} />
                         <h2>{product.name}</h2>
-                        <p>{product.price}</p>
+                        <p>Price: {product.price}</p>
+                        <p>In Stock: {product.stock}</p>
                     </div>
                     <button>Add to Cart</button>
                 </div>
