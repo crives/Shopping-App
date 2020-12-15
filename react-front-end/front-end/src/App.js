@@ -2,6 +2,13 @@ import './App.css';
 import React, { Component } from 'react';
 import { MainRouter } from './components/MainRouter';
 import { ProductDetail } from './components/ProductDetail';
+import { Home } from './components/Home';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import axios from 'axios';
 
 
@@ -33,8 +40,15 @@ export class App extends Component {
     ));
     return (
       <div>
-        {/* add in <Home with props /> as separate component, change MainRouter(?) */}
-        <MainRouter isLogged={this.state.isLogged} products={this.state.products} isAdmin={this.state.isAdmin}/>
+        <Router>
+          <Switch>
+            <div>
+            {/* <MainRouter isLogged={this.state.isLogged} isAdmin={this.state.isAdmin} /> */}
+              <Home products={this.state.products} isLogged={this.state.isLogged} isAdmin={this.state.isAdmin}/>
+            </div>
+          </Switch>
+        </Router>
+        
       </div>
     );
   }
