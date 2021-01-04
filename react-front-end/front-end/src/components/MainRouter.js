@@ -16,19 +16,33 @@ export class MainRouter extends Component {
     const isLogged = this.props.isLogged;
     if (isLogged) {
       return (
-        <nav>
-          <ul>
-            <li>
-              <Link to="/Home">Home</Link>
-            </li>
-            <li>
-              <Link to="/ProductList">List of Products</Link>
-            </li>
-            <li>
-              <Link to="/AddProduct">Add a Product</Link>
-            </li>
-          </ul>
-        </nav>
+        <Router>
+          <Switch>
+            <nav>
+              <ul>
+                <li>
+                  <Link to="/Home">Home</Link>
+                </li>
+                <li>
+                  <Link to="/ProductList">List of Products</Link>
+                </li>
+                <li>
+                  <Link to="/AddProduct">Add a Product</Link>
+                </li>
+              </ul>
+            </nav>
+            <Route path='/Home'>
+              <Home/>
+            </Route>
+            <Route path='/ProductList'>
+              <ProductList/>
+            </Route>
+            <Route>
+              <AddProduct/>
+            </Route>
+          </Switch>
+        </Router>
+
       );
     }
   }
